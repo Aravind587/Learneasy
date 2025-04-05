@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnEasy - Your Courses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/web-icon.jpg') }}">
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='images/login_background.png') }}') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: white;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        header, main {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('index') }}" class="logo-link">
+                <span class="web-icon">📚</span>
+                <h1>LearnEasy</h1>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('courses') }}">Courses</a></li>
+                <li id="auth-link"><a href="{{ url_for('login') }}">Login</a></li>
+                <li id="profile-link" class="profile">
+                    <span class="username">
+                        <span class="profile-icon">👤</span>
+                    </span>
+                    <div class="profile-dropdown">
+                        <a href="{{ url_for('candidate_details') }}">Candidate Details</a>
+                        <a href="{{ url_for('your_courses') }}" class="active">Your Courses</a>
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            <button class="hamburger" aria-label="Toggle menu">
+                <span>⋮</span>
+            </button>
+        </nav>
+    </header>
+    <main>
+        <div id="notification" class="notification"></div>
+        <section class="courses">
+            <h2>Your Enrolled Courses</h2>
+            <div id="enrolled-courses" class="course-grid">
+                <p class="no-courses">You have not enrolled in any courses yet.</p>
+            </div>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

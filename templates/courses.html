@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnEasy - Courses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/web-icon.jpg') }}">
+    <style>
+        body {
+            background: url('{{ url_for('static', filename='images/login_background.png') }}') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: white;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        header, main {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('index') }}" class="logo-link">
+                <span class="web-icon">📚</span>
+                <h1>LearnEasy</h1>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('courses') }}" class="active">Courses</a></li>
+                <li id="auth-link"><a href="{{ url_for('login') }}">Login</a></li>
+                <li id="profile-link" class="profile">
+                    <span class="username">
+                        <span class="profile-icon">👤</span>
+                    </span>
+                    <div class="profile-dropdown">
+                        <a href="{{ url_for('candidate_details') }}">Candidate Details</a>
+                        <a href="{{ url_for('your_courses') }}">Your Courses</a>
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            <button class="hamburger" aria-label="Toggle menu">
+                <span>⋮</span>
+            </button>
+        </nav>
+    </header>
+    <main>
+        <div id="notification" class="notification"></div>
+        <section class="courses">
+            <h2>Available Courses</h2>
+            <div class="course-grid">
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/html.png') }}" alt="HTML5 Logo" class="course-img">
+                    <h3>HTML Basics</h3>
+                    <p>Build your first webpage with HTML.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/css.png') }}" alt="CSS3 Logo" class="course-img">
+                    <h3>CSS Styling</h3>
+                    <p>Make your websites beautiful with CSS.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/js.png') }}" alt="JavaScript Logo" class="course-img">
+                    <h3>JavaScript Essentials</h3>
+                    <p>Add interactivity with JavaScript.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/Python.png') }}" alt="Python Logo" class="course-img">
+                    <h3>Python Programming</h3>
+                    <p>Learn the basics of Python for automation and more.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/C++.png') }}" alt="C++ Logo" class="course-img">
+                    <h3>C++ Fundamentals</h3>
+                    <p>Master C++ for high-performance applications.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/Java.png') }}" alt="Java Logo" class="course-img">
+                    <h3>Java Development</h3>
+                    <p>Build robust applications with Java.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/React.png') }}" alt="React Logo" class="course-img">
+                    <h3>React for Beginners</h3>
+                    <p>Create dynamic UIs with React.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/node.png') }}" alt="Node.js Logo" class="course-img">
+                    <h3>Node.js Basics</h3>
+                    <p>Build scalable backend apps with Node.js.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/Sql.png') }}" alt="PostgreSQL Logo" class="course-img">
+                    <h3>SQL with PostgreSQL</h3>
+                    <p>Manage databases using SQL and PostgreSQL.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/Github.png') }}" alt="GitHub Logo" class="course-img">
+                    <h3>Git & GitHub</h3>
+                    <p>Master version control with Git and GitHub.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/C.png') }}" alt="C Logo" class="course-img">
+                    <h3>C Programming</h3>
+                    <p>Learn the fundamentals of C programming.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/R.png') }}" alt="R Logo" class="course-img">
+                    <h3>R for Data Science</h3>
+                    <p>Analyze data with R programming.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/Ruby.png') }}" alt="Ruby Logo" class="course-img">
+                    <h3>Ruby Basics</h3>
+                    <p>Explore web development with Ruby.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/C_sharp.png') }}" alt="C# Logo" class="course-img">
+                    <h3>C# Programming</h3>
+                    <p>Develop applications with C#.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/Linux.png') }}" alt="Linux Logo" class="course-img">
+                    <h3>Linux Essentials</h3>
+                    <p>Get started with Linux and command-line tools.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/ML.png') }}" alt="Machine Learning Logo" class="course-img">
+                    <h3>Machine Learning Basics</h3>
+                    <p>Introduction to ML with Python and scikit-learn.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+                <div class="course-card">
+                    <img src="{{ url_for('static', filename='images/Cyber-security.png') }}" alt="Cybersecurity Icon" class="course-img">
+                    <h3>Cybersecurity Fundamentals</h3>
+                    <p>Learn the basics of securing systems and networks.</p>
+                    <button class="btn" onclick="checkLogin(event)">Enroll Now</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

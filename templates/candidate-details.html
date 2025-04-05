@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnEasy - Candidate Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/web-icon.jpg') }}">
+</head>
+<body class="login-bg">
+    <header>
+        <nav>
+            <a href="{{ url_for('index') }}" class="logo-link">
+                <span class="web-icon">📚</span>
+                <h1>LearnEasy</h1>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('courses') }}">Courses</a></li>
+                <li id="auth-link"><a href="{{ url_for('login') }}">Login</a></li>
+                <li id="profile-link" class="profile">
+                    <span class="username">
+                        <span class="profile-icon">👤</span>
+                    </span>
+                    <div class="profile-dropdown">
+                        <a href="{{ url_for('candidate_details') }}" class="active">Candidate Details</a>
+                        <a href="{{ url_for('your_courses') }}">Your Courses</ CAPITAL>
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            <button class="hamburger" aria-label="Toggle menu">
+                <span>⋮</span>
+            </button>
+        </nav>
+    </header>
+    <main>
+        <div id="notification" class="notification"></div>
+        <section id="candidate-details" class="courses">
+            <h2>Candidate Details</h2>
+
+            <!-- Personal Details -->
+            <div id="personal-info" class="info-section">
+                <h3>Personal Information</h3>
+                <div id="personal-details-view">
+                    <p><strong>Username:</strong> <span id="candidate-username">Loading...</span></p>
+                    <p><strong>Full Name:</strong> <span id="candidate-name">Loading...</span></p>
+                    <p><strong>Email:</strong> <span id="candidate-email">Loading...</span></p>
+                    <p><strong>Phone:</strong> <span id="candidate-phone">Loading...</span></p>
+                    <button class="btn" onclick="toggleEdit('personal')">Edit</button>
+                </div>
+                <div id="personal-details-edit" style="display: none;">
+                    <div class="input-group">
+                        <label for="edit-username">Username:</label>
+                        <input type="text" id="edit-username" value="Loading..." readonly>
+                    </div>
+                    <div class="input-group">
+                        <label for="edit-name">Full Name:</label>
+                        <input type="text" id="edit-name" value="Loading...">
+                    </div>
+                    <div class="input-group">
+                        <label for="edit-email">Email:</label>
+                        <input type="email" id="edit-email" value="Loading...">
+                    </div>
+                    <div class="input-group">
+                        <label for="edit-phone">Phone:</label>
+                        <input type="tel" id="edit-phone" value="Loading...">
+                    </div>
+                    <button class="btn" onclick="saveDetails('personal')">Save</button>
+                    <button class="btn btn-unenroll" onclick="toggleEdit('personal')">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Education Details -->
+            <div id="education-info" class="info-section">
+                <h3>Education Details</h3>
+                <div id="education-details-view">
+                    <div id="education-list">
+                        <p class="no-education">No education details provided yet.</p>
+                    </div>
+                    <button class="btn" onclick="toggleEdit('education')">Edit</button>
+                </div>
+                <div id="education-details-edit" style="display: none;">
+                    <div id="education-edit-list"></div>
+                    <button class="btn" onclick="addEducationField()">Add Education</button>
+                    <button class="btn" onclick="saveDetails('education')">Save</button>
+                    <button class="btn btn-unenroll" onclick="toggleEdit('education')">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Certificates -->
+            <div id="certificate-info" class="info-section">
+                <h3>Certificates</h3>
+                <div id="certificate-details-view">
+                    <div id="certificate-list" class="course-grid">
+                        <p class="no-certificates">No certificates earned yet.</p>
+                    </div>
+                    <button class="btn" onclick="toggleEdit('certificate')">Edit</button>
+                </div>
+                <div id="certificate-details-edit" style="display: none;">
+                    <div id="certificate-edit-list" class="course-grid"></div>
+                    <button class="btn" onclick="addCertificateField()">Add Certificate</button>
+                    <button class="btn" onclick="saveDetails('certificate')">Save</button>
+                    <button class="btn btn-unenroll" onclick="toggleEdit('certificate')">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Resume -->
+            <div id="resume-info" class="info-section">
+                <h3>Resume</h3>
+                <div id="resume-details-view">
+                    <div id="resume-container">
+                        <p id="no-resume">No resume uploaded yet.</p>
+                    </div>
+                    <button class="btn" onclick="toggleEdit('resume')">Edit</button>
+                </div>
+                <div id="resume-details-edit" style="display: none;">
+                    <div id="resume-edit-container">
+                        <p id="current-resume">No resume uploaded yet.</p>
+                        <input type="file" id="resume-upload" accept=".pdf" style="display: none;">
+                        <button class="btn" onclick="document.getElementById('resume-upload').click()">Upload New Resume</button>
+                    </div>
+                    <button class="btn" onclick="saveDetails('resume')">Save</button>
+                    <button class="btn btn-unenroll" onclick="toggleEdit('resume')">Cancel</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
